@@ -3,9 +3,6 @@ import { Component, signal } from '@angular/core';
 @Component({
   selector: 'app-root',
   imports: [],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  template: ``
 })
-export class App {
-  protected readonly title = signal('cooking-countdown');
-}
+export class App { }
