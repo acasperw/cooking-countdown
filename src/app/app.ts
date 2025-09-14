@@ -19,7 +19,7 @@ import { CookingPlannerService } from './planner.service';
       <hr />
       <h2>Plan</h2>
       <plan-narrative />
-      <button type="button" (click)="svc.showTable.set(!svc.showTable())">{{ svc.showTable() ? 'Hide' : 'Show' }} detailed table</button>
+      <button type="button" (click)="svc.toggleTable()">{{ svc.showTable() ? 'Hide' : 'Show' }} detailed table</button>
       @if (svc.showTable()) {
         <div style="margin-top:1rem;">
           <schedule-table />

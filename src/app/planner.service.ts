@@ -1,10 +1,11 @@
 import { inject, Injectable, signal, computed, effect } from '@angular/core';
 import { FoodItemInput, ScheduledFoodItem, NarrativeEntry } from './shared/models';
+import { AnalyticsService } from './analytics.service';
 import { buildFinishDate, formatTime } from './shared/time.util';
 
 @Injectable({ providedIn: 'root' })
 export class CookingPlannerService {
-  private readonly STORAGE_KEY = 'cook-countdown-v1';
+  private readonly STORAGE_KEY = 'cook-countdown-session';
   private nextId = 1;
 
   finishTimeStr = signal<string>('18:00');
@@ -50,6 +51,8 @@ export class CookingPlannerService {
     });
   });
 
+  private analytics = inject(AnalyticsService);
+
   constructor() {
     this.loadFromStorage();
     effect(() => {
@@ -63,22 +66,36 @@ export class CookingPlannerService {
       const [hh, mm] = value.split(':').map(Number);
       if (hh >= 0 && hh < 24 && mm >= 0 && mm < 60) {
         this.finishTimeStr.set(`${hh.toString().padStart(2,'0')}:${mm.toString().padStart(2,'0')}`);
+        this.analytics.logEvent('finish_time_changed', { finishTime: this.finishTimeStr() });
       }
     }
   }
 
   addItem() {
-    this.items.update(list => [...list, { id: this.nextId++, name: '', cookMins: null, restMins: null }]);
+    let newId = this.nextId++;
+    this.items.update(list => [...list, { id: newId, name: '', cookMins: null, restMins: null }]);
+    this.analytics.logEvent('item_added', { id: newId, count: this.items().length });
   }
-  removeItem(id: number) { this.items.update(list => list.filter(i => i.id !== id)); }
+  removeItem(id: number) {
+    this.items.update(list => list.filter(i => i.id !== id));
+    this.analytics.logEvent('item_removed', { id, count: this.items().length });
+  }
   updateItem(id: number, patch: Partial<Omit<FoodItemInput, 'id'>>) {
     this.items.update(list => list.map(i => i.id === id ? { ...i, ...patch } : i));
+    this.analytics.logEvent('item_updated', { id, patch });
   }
 
   clearAll() {
     this.finishTimeStr.set('18:00');
     this.items.set([{ id: this.nextId++, name: '', cookMins: null, restMins: null }]);
     try { sessionStorage.removeItem(this.STORAGE_KEY); } catch {}
+    this.analytics.logEvent('items_cleared');
+  }
+
+  toggleTable() {
+    const next = !this.showTable();
+    this.showTable.set(next);
+    this.analytics.logEvent('table_toggled', { visible: next });
   }
 
   private loadFromStorage() {
