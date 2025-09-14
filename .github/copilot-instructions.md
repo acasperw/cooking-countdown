@@ -23,6 +23,8 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Use `computed()` for derived state
 - Set `changeDetection: ChangeDetectionStrategy.OnPush` in `@Component` decorator
 - Prefer inline templates for small components
+- Do NOT generate a component stylesheet file; all components must use `inlineStyle` with styles consolidated in the global `src/styles.scss`
+- Any component-specific styling should use BEM-ish naming or host/contextual classes defined in the global stylesheet
 - Prefer Reactive forms instead of Template-driven ones
 - Do NOT use `ngClass`, use `class` bindings instead
 - Do NOT use `ngStyle`, use `style` bindings instead
