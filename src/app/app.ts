@@ -10,7 +10,7 @@ import { CookingPlannerService } from './planner.service';
   imports: [FinishTimeInputComponent, ItemsEditorComponent, PlanNarrativeComponent, ScheduleTableComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="wrapper">
+    <div class="container">
       <h1>Cooking Countdown Helper</h1>
       <finish-time-input />
       <hr />

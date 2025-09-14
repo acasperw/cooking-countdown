@@ -1,0 +1,11 @@
+table {
+  border-spacing: 4px;
+
+  thead {
+    th {
+      border: 1px solid var(--wp--preset--color--primary, var(--wp--preset--color--dark, #000000));
+      background-color: var(--wp--preset--color--primary, var(--wp--preset--color--dark, #000000));
+      color: var(--wp--preset--color--white, #ffffff);
+    }
+  }
+}

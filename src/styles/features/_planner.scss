@@ -1,0 +1,14 @@
+// Feature-specific hooks for the cooking planner
+.planner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.planner__items-row {
+  display: flex;
+  align-items: center;
+}
+
+.planner__narrative {
+  line-height: 1.5;
+}

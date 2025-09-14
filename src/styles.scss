@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@patter/patter-core-styles/scss/independent-styles-setup';
+@use '@patter/patter-core-styles/scss/main';
+
+@use 'styles/base/typography';
+
+// Components (generic reusable pieces)
+// @import 'styles/components/buttons';
+@use 'styles/components/tables';
+
+// Feature styles (scoped by feature area)
+@use 'styles/features/planner';
+
+:root {
+  // Patter setup
+  --wp--preset--font-family--body-font: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --wp--preset--color--primary: #272e3e;
+  --wp--preset--color--secondary: #FFBC00;
+  --wp--preset--color--light: #f4f4f4;
+  --wp--preset--color--dark: #1F1F1F;
+
+  --wp--custom--color--primary-text: var(--wp--preset--color--white);
+  --wp--custom--color--primary-hover-text: var(--wp--preset--color--white);
+  --wp--custom--color--primary-hover: #475370;
+
+  --wp--custom--color--border: #e1e5ea;
+  --wp--custom--default-border-radius: 6px;
+  --wp--style--global--content-size: 1280px;
+}
