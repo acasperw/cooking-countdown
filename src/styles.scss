@@ -1,5 +1,6 @@
 @use '@patter/patter-core-styles/scss/independent-styles-setup';
 @use '@patter/patter-core-styles/scss/main';
+@use '@patter/patter-core-styles/scss/wordpress-public';
 
 @use 'styles/base/typography';
 
@@ -25,5 +26,8 @@
 
   --wp--custom--color--border: #e1e5ea;
   --wp--custom--default-border-radius: 6px;
-  --wp--style--global--content-size: 1280px;
+  --wp--style--global--content-size: 700px;
+
+  --wp--custom--content--button-input-padding-y: 0.5rem;
+  --wp--custom--content--button-input-padding-x: 1rem;
 }

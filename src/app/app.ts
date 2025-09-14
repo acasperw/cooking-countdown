@@ -4,10 +4,11 @@ import { ItemsEditorComponent } from './items-editor.component';
 import { PlanNarrativeComponent } from './plan-narrative.component';
 import { ScheduleTableComponent } from './schedule-table.component';
 import { CookingPlannerService } from './planner.service';
+import { PtrButtonComponent } from '@patter/ngx-components';
 
 @Component({
   selector: 'app-root',
-  imports: [FinishTimeInputComponent, ItemsEditorComponent, PlanNarrativeComponent, ScheduleTableComponent],
+  imports: [FinishTimeInputComponent, ItemsEditorComponent, PlanNarrativeComponent, ScheduleTableComponent, PtrButtonComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="container">
@@ -19,7 +20,7 @@ import { CookingPlannerService } from './planner.service';
       <hr />
       <h2>Plan</h2>
       <plan-narrative />
-      <button type="button" (click)="svc.toggleTable()">{{ svc.showTable() ? 'Hide' : 'Show' }} detailed table</button>
+      <ptr-button (clicked)="svc.toggleTable()">{{ svc.showTable() ? 'Hide' : 'Show' }} detailed table</ptr-button>
       @if (svc.showTable()) {
         <div style="margin-top:1rem;">
           <schedule-table />

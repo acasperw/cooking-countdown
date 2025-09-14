@@ -1,8 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { CookingPlannerService } from './planner.service';
+import { PtrButtonComponent } from '@patter/ngx-components';
 
 @Component({
   selector: 'items-editor',
+  imports: [PtrButtonComponent],
   template: `
     <div class="items">
       @for (item of svc.items(); track item.id) {
@@ -12,12 +14,12 @@ import { CookingPlannerService } from './planner.service';
           <span>cook</span>
           <input type="number" min="0" style="width:6ch" placeholder="Rest" [value]="item.restMins ?? ''" (input)="onRest(item.id, $event)" />
           <span>rest</span>
-          <button type="button" (click)="svc.removeItem(item.id)">✕</button>
+          <ptr-button (clicked)="svc.removeItem(item.id)" buttonStyle="error" [isSmallSize]="true">✕</ptr-button>
         </div>
       }
       <div style="display:flex; gap:.5rem;">
-        <button type="button" (click)="svc.addItem()">Add Item</button>
-        <button type="button" (click)="svc.clearAll()">Clear</button>
+         <ptr-button (clicked)="svc.addItem()">Add Item</ptr-button>
+         <ptr-button (clicked)="svc.clearAll()" buttonStyle="secondary">Clear</ptr-button>
       </div>
     </div>
   `
