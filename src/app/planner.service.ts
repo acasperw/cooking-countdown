@@ -51,6 +51,40 @@ export class CookingPlannerService {
     });
   });
 
+  // Group items that share the same putIn time for unified narrative sentences
+  groupedNarrativeEntries = computed(() => {
+    const entries = this.narrativeEntries();
+    if (!entries.length) return [] as Array<{
+      putIn: Date;
+      items: NarrativeEntry[];
+      isFirstGroup: boolean;
+      deltaFromPrevGroup: number | null; // minutes from previous group start
+      prevGroupLastName: string | null;
+    }>;
+    const groups: Array<{
+      putIn: Date;
+      items: NarrativeEntry[];
+      isFirstGroup: boolean;
+      deltaFromPrevGroup: number | null;
+      prevGroupLastName: string | null;
+    }> = [];
+    entries.forEach((entry, idx) => {
+      if (!groups.length) {
+        groups.push({ putIn: entry.item.putIn, items: [entry], isFirstGroup: true, deltaFromPrevGroup: null, prevGroupLastName: null });
+        return;
+      }
+      const last = groups[groups.length - 1];
+      if (last.putIn.getTime() === entry.item.putIn.getTime()) {
+        last.items.push(entry);
+      } else {
+        const prevLastItem = last.items[last.items.length - 1].item;
+        const delta = Math.round((entry.item.putIn.getTime() - last.putIn.getTime()) / 60000);
+        groups.push({ putIn: entry.item.putIn, items: [entry], isFirstGroup: false, deltaFromPrevGroup: delta, prevGroupLastName: prevLastItem.name });
+      }
+    });
+    return groups;
+  });
+
   private analytics = inject(AnalyticsService);
 
   constructor() {
