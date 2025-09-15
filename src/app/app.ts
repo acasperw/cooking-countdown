@@ -20,9 +20,9 @@ import { PtrButtonComponent } from '@patter/ngx-components';
       <hr />
       <h2>Plan</h2>
       <plan-narrative />
-      <ptr-button (clicked)="svc.toggleTable()">{{ svc.showTable() ? 'Hide' : 'Show' }} detailed table</ptr-button>
+      <ptr-button extraClasses="mt-3" (clicked)="svc.toggleTable()">{{ svc.showTable() ? 'Hide' : 'Show' }} detailed table</ptr-button>
       @if (svc.showTable()) {
-        <div style="margin-top:1rem;">
+        <div class="mt-2">
           <schedule-table />
         </div>
       }

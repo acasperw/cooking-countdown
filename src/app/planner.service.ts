@@ -12,7 +12,7 @@ export class CookingPlannerService {
   items = signal<FoodItemInput[]>([{ id: this.nextId++, name: 'Turkey', cookMins: 180, restMins: 30 }]);
   showTable = signal<boolean>(false);
 
-  finishDate = computed(() => buildFinishDate(this.finishTimeStr()) );
+  finishDate = computed(() => buildFinishDate(this.finishTimeStr()));
 
   schedule = computed<ScheduledFoodItem[]>(() => {
     const finish = this.finishDate();
@@ -57,7 +57,7 @@ export class CookingPlannerService {
     this.loadFromStorage();
     effect(() => {
       const payload = JSON.stringify({ finishTime: this.finishTimeStr(), items: this.items() });
-      try { sessionStorage.setItem(this.STORAGE_KEY, payload); } catch {}
+      try { sessionStorage.setItem(this.STORAGE_KEY, payload); } catch { }
     });
   }
 
@@ -65,7 +65,7 @@ export class CookingPlannerService {
     if (/^\d{1,2}:\d{2}$/.test(value)) {
       const [hh, mm] = value.split(':').map(Number);
       if (hh >= 0 && hh < 24 && mm >= 0 && mm < 60) {
-        this.finishTimeStr.set(`${hh.toString().padStart(2,'0')}:${mm.toString().padStart(2,'0')}`);
+        this.finishTimeStr.set(`${hh.toString().padStart(2, '0')}:${mm.toString().padStart(2, '0')}`);
         this.analytics.logEvent('finish_time_changed', { finishTime: this.finishTimeStr() });
       }
     }
@@ -73,7 +73,7 @@ export class CookingPlannerService {
 
   addItem() {
     let newId = this.nextId++;
-    this.items.update(list => [...list, { id: newId, name: '', cookMins: null, restMins: null }]);
+    this.items.update(list => [...list, { id: newId, name: '', cookMins: null, restMins: 0 }]);
     this.analytics.logEvent('item_added', { id: newId, count: this.items().length });
   }
   removeItem(id: number) {
@@ -87,8 +87,8 @@ export class CookingPlannerService {
 
   clearAll() {
     this.finishTimeStr.set('18:00');
-    this.items.set([{ id: this.nextId++, name: '', cookMins: null, restMins: null }]);
-    try { sessionStorage.removeItem(this.STORAGE_KEY); } catch {}
+    this.items.set([{ id: this.nextId++, name: 'Turkey', cookMins: 180, restMins: 0 }]);
+    try { sessionStorage.removeItem(this.STORAGE_KEY); } catch { }
     this.analytics.logEvent('items_cleared');
   }
 
@@ -109,7 +109,7 @@ export class CookingPlannerService {
         const maxId = parsed.items.reduce((m, i) => Math.max(m, i.id), 0);
         this.nextId = maxId + 1;
       }
-    } catch {}
+    } catch { }
   }
 
   formatTime(date: Date) { return formatTime(date); }

@@ -1,18 +1,30 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy, effect } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CookingPlannerService } from './planner.service';
+import { PtrInputComponent } from '@patter/ngx-components';
 
 @Component({
   selector: 'finish-time-input',
+  imports: [PtrInputComponent, ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <label>Finish (Serve) Time:
-      <input type="time" [value]="svc.finishTimeStr()" (input)="onChange($event)" />
-    </label>
+    <form>
+      <ptr-input label="Finish (Serve) Time" type="time" [formControl]="finishTimeCtrl" />
+    </form>
   `
 })
 export class FinishTimeInputComponent {
-  svc = inject(CookingPlannerService);
-  onChange(ev: Event) {
-    const value = (ev.target as HTMLInputElement).value;
-    this.svc.setFinishTime(value);
+  readonly svc = inject(CookingPlannerService);
+
+  readonly finishTimeCtrl = new FormControl<string>(this.svc.finishTimeStr(), { nonNullable: true });
+
+  constructor() {
+    this.finishTimeCtrl.valueChanges.subscribe(v => this.svc.setFinishTime(v));
+    effect(() => {
+      const current = this.svc.finishTimeStr();
+      if (current !== this.finishTimeCtrl.value) {
+        this.finishTimeCtrl.setValue(current, { emitEvent: false });
+      }
+    });
   }
 }
