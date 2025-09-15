@@ -12,10 +12,10 @@ import { PtrButtonComponent } from '@patter/ngx-components';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="container">
-      <h1>Cooking Countdown Helper</h1>
+      <h1>Cooking Countdown</h1>
       <finish-time-input />
       <hr />
-      <h2>Items</h2>
+      <h2>Menu Items</h2>
       <items-editor />
       <hr />
       <h2>Plan</h2>

@@ -12,6 +12,8 @@
 @use 'styles/features/planner';
 
 :root {
+  --app--color--background: #FAF9F7;
+
   // Patter setup
   --wp--preset--font-family--body-font: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
@@ -30,4 +32,28 @@
 
   --wp--custom--content--button-input-padding-y: 0.5rem;
   --wp--custom--content--button-input-padding-x: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --app--color--background: #1F1F1F;
+    --wp--preset--color--dark: #FAF9F7;
+    --wp--preset--color--primary: #2C3544;
+  }
+
+  form:where(:not(.wc-block-components-form)) input:where(:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=file])),
+  form:where(:not(.wc-block-components-form)) textarea,
+  form:where(:not(.wc-block-components-form)) select {
+    background-color: #2A2A2A;
+    color: var(--wp--preset--color--dark);
+  }
+
+  .is-style-outline .wp-block-button__link {
+    border-color: var(--wp--preset--color--primary);
+    color: var(--wp--preset--color--dark);
+  }
+
+  input {
+    color-scheme: dark;
+  }
 }

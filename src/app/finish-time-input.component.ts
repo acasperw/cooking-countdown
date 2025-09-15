@@ -8,8 +8,12 @@ import { PtrInputComponent } from '@patter/ngx-components';
   imports: [PtrInputComponent, ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <form>
-      <ptr-input label="Finish (Serve) Time" type="time" [formControl]="finishTimeCtrl" />
+    <form class="gform_wrapper">
+      <div class="gform_fields">
+        <div class="gfield gfield--width-half gfield--label-inline">
+          <ptr-input label="Finish (Serve) Time" type="time" [formControl]="finishTimeCtrl" labelPosition="inline" />
+        </div>
+      </div>
     </form>
   `
 })

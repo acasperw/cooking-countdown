@@ -8,6 +8,11 @@ body {
   font-size: 1rem;
   color: var(--wp--preset--color--dark);
   overflow-x: hidden;
+  background-color: var(--app--color--background);
+}
+
+h1 {
+  margin-top: 4rem !important;
 }
 
 h2 {
@@ -16,4 +21,9 @@ h2 {
 
 h3 {
   font-size: var(--wp--custom--typography--font-size--heading-3);
+}
+
+.container {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }

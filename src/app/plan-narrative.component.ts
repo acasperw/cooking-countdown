@@ -6,7 +6,7 @@ import { NarrativeEntry } from './shared/models';
   selector: 'plan-narrative',
   template: `
     @if (svc.groupedNarrativeEntries().length === 0) {
-      <p>No valid items yet. Add cooking times.</p>
+      <p>Add cooking times</p>
     } @else {
       <div style="line-height:1.5;">
         @for (group of svc.groupedNarrativeEntries(); track group.putIn) {
