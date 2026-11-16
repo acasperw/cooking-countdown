@@ -38,11 +38,14 @@ This will compile your project and store the build artifacts in the `dist/` dire
 
 ## Running unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+To execute unit tests with [Vitest](https://vitest.dev/) and jsdom, use the following command:
 
 ```bash
 ng test
 ```
+
+There are currently no test files, so the command reports that no tests were found.
+Angular discovers files named `*.spec.ts` or `*.test.ts` under `src`.
 
 ## Running end-to-end tests
 
