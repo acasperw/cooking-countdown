@@ -1,9 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CookingPlannerService } from './planner.service';
 import { NarrativeEntry } from './shared/models';
 
 @Component({
   selector: 'plan-narrative',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     @if (svc.groupedNarrativeEntries().length === 0) {
       <p>Add cooking times</p>

@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CookingPlannerService } from './planner.service';
 
 @Component({
   selector: 'schedule-table',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     @if (svc.firstItem()) {
       <p>Earliest action: at <strong>{{ svc.formatTime(svc.firstItem()!.putIn) }}</strong> put <strong>{{ svc.firstItem()!.name }}</strong> in.</p>

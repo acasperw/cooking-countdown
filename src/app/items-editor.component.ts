@@ -1,4 +1,4 @@
-import { Component, inject, effect } from '@angular/core';
+import { Component, inject, effect, ChangeDetectionStrategy } from '@angular/core';
 import { CookingPlannerService } from './planner.service';
 import { PtrButtonComponent, PtrInputComponent } from '@patter/ngx-components';
 import { ReactiveFormsModule, FormGroup, FormControl, FormArray } from '@angular/forms';
@@ -6,6 +6,7 @@ import { FoodItemInput } from './shared/models';
 @Component({
   selector: 'items-editor',
   imports: [PtrButtonComponent, PtrInputComponent, ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <form class="planner-editor gform_wrapper" [formGroup]="form" (submit)="$event.preventDefault()">
       <div formArrayName="items" class="planner-editor__items">
