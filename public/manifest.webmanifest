@@ -1,0 +1,14 @@
+{
+  "name": "When to Start Cooking",
+  "short_name": "Cooking Planner",
+  "description": "Plan backwards from when you want to eat and see when each food item needs to go in, come out, and rest.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF9F7",
+  "theme_color": "#272E3E",
+  "icons": [
+    { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}

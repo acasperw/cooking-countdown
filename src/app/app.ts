@@ -11,22 +11,23 @@ import { PtrButtonComponent } from '@patter/ngx-components';
   imports: [FinishTimeInputComponent, ItemsEditorComponent, PlanNarrativeComponent, ScheduleTableComponent, PtrButtonComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="container">
-      <h1>Cooking Countdown</h1>
+    <main class="container">
+      <h1>When to Start Cooking</h1>
+      <p>Planning a meal?</p>
       <finish-time-input />
       <hr />
-      <h2>Menu Items</h2>
+      <h2>What are you cooking?</h2>
       <items-editor />
       <hr />
-      <h2>Plan</h2>
+      <h2>Your cooking plan</h2>
       <plan-narrative />
-      <ptr-button extraClasses="mt-3" (clicked)="svc.toggleTable()">{{ svc.showTable() ? 'Hide' : 'Show' }} detailed table</ptr-button>
+      <ptr-button extraClasses="mt-3" (clicked)="svc.toggleTable()">{{ svc.showTable() ? 'Hide' : 'Show' }} cooking schedule</ptr-button>
       @if (svc.showTable()) {
         <div class="mt-2">
           <schedule-table />
         </div>
       }
-    </div>
+    </main>
   `
 })
 export class App {

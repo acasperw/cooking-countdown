@@ -22,13 +22,18 @@ import { FoodItemInput } from './shared/models';
             <div class="gfield gfield--label-inline" style="width: 11.5ch;">
               <ptr-input type="number" min="0" label="Rest (mins)" formControlName="restMins" labelPosition="inline" />
             </div>
-            <ptr-button (clicked)="remove(i, group.controls.id.value)" buttonStyle="error" [isSmallSize]="true">✕</ptr-button>
+            <ptr-button
+              (clicked)="remove(i, group.controls.id.value)"
+              buttonStyle="error"
+              [isSmallSize]="true"
+              [ariaLabel]="'Remove ' + (group.controls.name.value || 'item')"
+            ><span aria-hidden="true">✕</span></ptr-button>
           </div>
         }
       </div>
       <div style="display:flex; gap:.5rem;">
-        <ptr-button extraClasses="mt-1" (clicked)="add()">Add Item</ptr-button>
-        <ptr-button extraClasses="mt-1" (clicked)="resetAll()" buttonStyle="secondary">Reset</ptr-button>
+        <ptr-button extraClasses="mt-1" (clicked)="add()">Add another item</ptr-button>
+        <ptr-button extraClasses="mt-1" (clicked)="resetAll()" buttonStyle="secondary">Reset plan</ptr-button>
       </div>
     </form>
   `

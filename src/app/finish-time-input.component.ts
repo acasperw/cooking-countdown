@@ -11,7 +11,7 @@ import { PtrInputComponent } from '@patter/ngx-components';
     <form class="gform_wrapper">
       <div class="gform_fields">
         <div class="gfield gfield--width-half gfield--label-inline">
-          <ptr-input label="Finish (Serve) Time" type="time" [formControl]="finishTimeCtrl" labelPosition="inline" />
+          <ptr-input label="When do you want to eat?" type="time" [formControl]="finishTimeCtrl" labelPosition="inline" />
         </div>
       </div>
     </form>

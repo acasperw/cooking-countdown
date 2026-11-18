@@ -6,23 +6,24 @@ import { CookingPlannerService } from './planner.service';
   changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     @if (svc.firstItem()) {
-      <p>Earliest action: at <strong>{{ svc.formatTime(svc.firstItem()!.putIn) }}</strong> put <strong>{{ svc.firstItem()!.name }}</strong> in.</p>
+      <p>Start with <strong>{{ svc.firstItem()!.name }}</strong>: put it in at <strong>{{ svc.formatTime(svc.firstItem()!.putIn) }}</strong>.</p>
     }
     <table border="1" cellpadding="4" style="border-collapse:collapse;">
+      <caption class="screen-reader-text">Cooking schedule for each food item</caption>
       <thead>
         <tr>
-          <th>Food</th>
-          <th>Put In</th>
-          <th>Take Out</th>
-          <th>Ready (After Rest)</th>
-          <th>Cook (m)</th>
-          <th>Rest (m)</th>
+          <th scope="col">Food item</th>
+          <th scope="col">Start cooking</th>
+          <th scope="col">Take out</th>
+          <th scope="col">Ready to serve</th>
+          <th scope="col">Cook time (mins)</th>
+          <th scope="col">Rest time (mins)</th>
         </tr>
       </thead>
       <tbody>
         @for (s of svc.schedule(); track s.id) {
           <tr>
-            <td>{{ s.name }}</td>
+            <th scope="row">{{ s.name }}</th>
             <td>{{ svc.formatTime(s.putIn) }}</td>
             <td>{{ svc.formatTime(s.takeOut) }}</td>
             <td>{{ svc.formatTime(s.ready) }}</td>

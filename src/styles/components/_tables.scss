@@ -9,4 +9,9 @@ table {
       color: var(--wp--preset--color--white, #ffffff);
     }
   }
+
+  tbody th {
+    text-align: start;
+    font-weight: inherit;
+  }
 }
